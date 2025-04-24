@@ -5,7 +5,7 @@
     "contactDescription": "Skontaktuj się ze mną za pomocą poniższych przycisków:",
     "footerText": "© 2025 Kamil `DraGoN` . Wszystkie prawa zastrzeżone.",
     "links": [
-        { "name": "GitHub", "url": "https://github.com", "category": "Social Media" },
+        { "name": "GitHub", "url": "https://github.com/MrrDraGoN", "category": "Personal" },
         { "name": "LinkedIn", "url": "https://linkedin.com", "category": "Social Media" },
         { "name": "Portfolio", "url": "https://example.com", "category": "Personal" }
     ]
