@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>I Love You Drawing</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #fff0f5;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .canvas {
+            position: relative;
+            width: 400px;
+            height: 500px;
+        }
+
+        .heart-grid {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(11, 20px);
+            grid-gap: 4px;
+        }
+
+        .heart {
+            width: 18px;
+            height: 18px;
+            background: red;
+            clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 87% 25%, 87% 37%, 50% 75%, 13% 37%, 13% 25%, 25% 12%, 39% 12%);
+            opacity: 0;
+            animation: pop 0.4s forwards;
+        }
+
+        .heart:nth-child(n) {
+            animation-delay: calc(var(--i) * 0.05s);
+        }
+
+        @keyframes pop {
+            to {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .character {
+            position: absolute;
+            bottom: 90px;
+            left: 10px;
+            width: 120px;
+            height: 140px;
+            animation: fadeIn 1s ease-in-out 2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .character .head {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 10px;
+        }
+
+        .character .eye {
+            width: 6px;
+            height: 6px;
+            background: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 30px;
+        }
+
+        .eye.left {
+            left: 25px;
+        }
+
+        .eye.right {
+            right: 25px;
+        }
+
+        .character .cheek {
+            width: 10px;
+            height: 6px;
+            background: pink;
+            border-radius: 50%;
+            position: absolute;
+            top: 45px;
+        }
+
+        .cheek.left {
+            left: 20px;
+        }
+
+        .cheek.right {
+            right: 20px;
+        }
+
+        .character .smile {
+            position: absolute;
+            top: 50px;
+            left: 35px;
+            width: 10px;
+            height: 5px;
+            border-bottom: 2px solid black;
+            border-radius: 50%;
+        }
+
+        .character .body {
+            position: absolute;
+            top: 80px;
+            left: 28px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 20%/30%;
+        }
+
+        .character .arm {
+            position: absolute;
+            top: 90px;
+            width: 40px;
+            height: 10px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+
+        .arm.right {
+            left: 78px;
+            transform: rotate(-10deg);
+        }
+
+        .character .text-biu {
+            position: absolute;
+            top: 60px;
+            left: 115px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .character .text-biu::before {
+            content: "❤";
+            font-size: 18px;
+            color: pink;
+            margin-right: 4px;
+        }
+
+        .mini-hearts {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: red;
+            opacity: 0;
+            animation: fadeIn 1s forwards 3.2s;
+        }
+
+        .mini-hearts.right {
+            left: auto;
+            right: 20px;
+        }
+
+        .text {
+            position: absolute;
+            bottom: 30px;
+            font-size: 32px;
+            color: #e04477;
+            opacity: 0;
+            animation: fadeIn 2s forwards 4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas">
+
+        <!-- Małe serca -->
+        <div class="mini-hearts">❤❤❤</div>
+        <div class="mini-hearts right">❤❤❤</div>
+
+        <!-- Serce z małych serduszek -->
+        <div class="heart-grid">
+            <script>
+                const grid = document.currentScript.parentElement;
+                const pattern = [
+                    '00100100100',
+                    '01111111110',
+                    '11111111111',
+                    '11111111111',
+                    '11111111111',
+                    '11111111111',
+                    '01111111110',
+                    '00111111100',
+                    '00011111000',
+                    '00001110000',
+                    '00000100000',
+                ];
+                let counter = 0;
+                pattern.forEach(row => {
+                    row.split('').forEach(cell => {
+                        if (cell === '1') {
+                            const div = document.createElement('div');
+                            div.className = 'heart';
+                            div.style.setProperty('--i', counter++);
+                            grid.appendChild(div);
+                        } else {
+                            const spacer = document.createElement('div');
+                            spacer.style.width = '20px';
+                            spacer.style.height = '20px';
+                            spacer.style.opacity = '0';
+                            grid.appendChild(spacer);
+                        }
+                    });
+                });
+            </script>
+        </div>
+
+        <!-- Postać -->
+        <div class="character">
+            <div class="head">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="cheek left"></div>
+                <div class="cheek right"></div>
+                <div class="smile"></div>
+            </div>
+            <div class="body"></div>
+            <div class="arm right"></div>
+            <div class="text-biu">biu</div>
+        </div>
+
+        <!-- Napis -->
+        <div class="text">I Love You</div>
+    </div>
+</body>
+
+</html>
